@@ -5,6 +5,7 @@ upstream <%= @resource.application.name %> {
     <% end -%>
   <% end -%>
   <% @hosts.each do |node| %>
+    server <%= node %>;
   <% end %>
 }
 
