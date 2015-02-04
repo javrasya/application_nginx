@@ -9,6 +9,16 @@ upstream <%= @resource.application.name %> {
   <% end %>
 }
 
+
+<% @resource.upstreams.each do |upstream| -%>
+upstream <%= upstream.fetch(:name)%> {
+  <% upstream.fetch(:servers).each do |upstream_server| -%>
+  server <%= upstream_server %>;
+  <% end -%>
+}
+
+<% end -%>
+
 server {
   listen <%= @resource.port %>;
   server_name <%= @resource.server_name.is_a?(Array) ? @resource.server_name.join(' ') : @resource.server_name %>;
@@ -30,4 +40,11 @@ server {
     proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
     <% end %>
   }
+
+ <% @resource.locations.each do |location| -%>
+  location <%= location.fetch(:path) %> {
+    <%= location.fetch(:directives).join("\n\s\s\s\s") %>
+  }
+  <% end %>
+
 }
