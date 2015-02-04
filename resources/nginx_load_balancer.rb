@@ -32,5 +32,6 @@ attribute :static_files, :kind_of => Hash, :default => {}
 attribute :ssl, :kind_of => [ TrueClass, FalseClass ], :default => false
 attribute :ssl_certificate, :kind_of => String, :default => "#{node['fqdn']}.crt"
 attribute :ssl_certificate_key, :kind_of => String, :default => "#{node['fqdn']}.key"
+attribute :upstream_keepalive,    :kind_of => Fixnum,  :default => 4
 attribute :upstreams,             :kind_of => Array,   :default => []
 attribute :locations,             :kind_of => Array,   :default => []

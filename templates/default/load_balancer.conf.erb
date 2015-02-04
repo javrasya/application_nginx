@@ -15,7 +15,7 @@ upstream <%= upstream.fetch(:name)%> {
   <% upstream.fetch(:servers).each do |upstream_server| -%>
   server <%= upstream_server %>;
   <% end -%>
-  keepalive <%= upstream.fetch(:keepalive) { @resource.upstream.keepalive } %>;
+  keepalive <%= upstream.fetch(:keepalive) { @resource.upstream_keepalive } %>;
 }
 
 <% end -%>
